@@ -43,6 +43,14 @@ node {
                     sh 'scp /var/lib/jenkins/workspace/pipeline-demo/*  ubuntu@172.31.34.177:/home/ubuntu'
                                 }
     }
+
+    stage('Kubernetes Deployement using Asible'){
+        	sshagent(['ansible_server']){
+            		sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.14.209 cd /home/ubuntu'
+            		sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.14.209 ansible -m ping node'
+            		sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.14.209 ansible-playbook ansible.yaml'
+        					}
+    }
     
     
     
